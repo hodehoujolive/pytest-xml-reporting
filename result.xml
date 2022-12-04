@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="4" time="51.267" timestamp="2022-12-04T12:34:01.690080" hostname="MacBook-Air-de-MacBooK.local"><testcase classname="tests.test_cart.TestCart" name="test_view_cart" time="10.341" /><testcase classname="tests.test_cart.TestCart" name="test_add_to_cart" time="8.569"><failure message="selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: Unable to locate an element with the xpath expression INVALID XPATH because of the following error:&#10;SyntaxError: Failed to execute 'evaluate' on 'Document': The string 'INVALID XPATH' is not a valid XPath expression.&#10;  (Session info: chrome=107.0.5304.63)&#10;Stacktrace:&#10;Backtrace:&#10;&#09;Ordinal0 [0x01458CE3+2067683]&#10;&#09;Ordinal0 [0x013ECBC1+1625025]&#10;&#09;Ordinal0 [0x012EB7CD+571341]&#10;&#09;Ordinal0 [0x012EE384+582532]&#10;&#09;Ordinal0 [0x012EE235+582197]&#10;&#09;Ordinal0 [0x012EE4D0+582864]&#10;&#09;Ordinal0 [0x0131A9C2+764354]&#10;&#09;Ordinal0 [0x0131AE3B+765499]&#10;&#09;Ordinal0 [0x0134D122+971042]&#10;&#09;Ordinal0 [0x01337384+881540]&#10;&#09;Ordinal0 [0x0134B576+963958]&#10;&#09;Ordinal0 [0x01337156+880982]&#10;&#09;Ordinal0 [0x0130FF1D+720669]&#10;&#09;Ordinal0 [0x01310F5F+724831]&#10;&#09;GetHandleVerifier [0x0170F162+2771330]&#10;&#09;GetHandleVerifier [0x01701145+2713957]&#10;&#09;GetHandleVerifier [0x014ECC0A+533546]&#10;&#09;GetHandleVerifier [0x014EB970+528784]&#10;&#09;Ordinal0 [0x013F4F4C+1658700]&#10;&#09;Ordinal0 [0x013F98B8+1677496]&#10;&#09;Ordinal0 [0x013F99A5+1677733]&#10;&#09;Ordinal0 [0x01404CC4+1723588]&#10;&#09;BaseThreadInitThunk [0x764462C4+36]&#10;&#09;RtlSubscribeWnfStateChangeNotification [0x77A90FA9+1081]&#10;&#09;RtlSubscribeWnfStateChangeNotification [0x77A90F74+1028]">self = &lt;test_cart.TestCart object at 0x10c3c6680&gt;, driver = &lt;selenium.webdriver.remote.webdriver.WebDriver (session="743f2bd8a484d53ca0d0e423ff90ceae")&gt;
+
+    def test_add_to_cart(self, driver):
+      driver.get("https://ecommerce-playground.lambdatest.io/")
+&gt;     product = driver.find_element(By.XPATH, 'INVALID XPATH')
+
+tests/test_cart.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/virtualenvs/How_to_generate_test_report_using_pytest_i-06yiM-BF/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:861: in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+../../.local/share/virtualenvs/How_to_generate_test_report_using_pytest_i-06yiM-BF/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:444: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x10c3c5900&gt;
+response = {'status': 400, 'value': '{"value":{"error":"invalid selector","message":"invalid selector: Unable to locate an elemen...cribeWnfStateChangeNotification [0x77A90FA9+1081]\\n\\tRtlSubscribeWnfStateChangeNotification [0x77A90F74+1028]\\n"}}'}
+
+    def check_response(self, response: Dict[str, Any]) -&gt; None:
+        """
+        Checks that a JSON response from the WebDriver does not have an error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get("status", None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get("value", None)
+            if value_json and isinstance(value_json, str):
+                import json
+    
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value["value"]
+                    status = value.get("error", None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get("message")
+                    else:
+                        message = value.get("message", None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_SHADOW_ROOT:
+            exception_class = NoSuchShadowRootException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif (
+            status in ErrorCode.INVALID_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER
+        ):
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = InvalidCookieDomainException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = UnableToSetCookieException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        elif status in ErrorCode.JAVASCRIPT_ERROR:
+            exception_class = JavascriptException
+        elif status in ErrorCode.SESSION_NOT_CREATED:
+            exception_class = SessionNotCreatedException
+        elif status in ErrorCode.INVALID_ARGUMENT:
+            exception_class = InvalidArgumentException
+        elif status in ErrorCode.NO_SUCH_COOKIE:
+            exception_class = NoSuchCookieException
+        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:
+            exception_class = ScreenshotException
+        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:
+            exception_class = ElementClickInterceptedException
+        elif status in ErrorCode.INSECURE_CERTIFICATE:
+            exception_class = InsecureCertificateException
+        elif status in ErrorCode.INVALID_COORDINATES:
+            exception_class = InvalidCoordinatesException
+        elif status in ErrorCode.INVALID_SESSION_ID:
+            exception_class = InvalidSessionIdException
+        elif status in ErrorCode.UNKNOWN_METHOD:
+            exception_class = UnknownMethodException
+        else:
+            exception_class = WebDriverException
+        if not value:
+            value = response["value"]
+        if isinstance(value, str):
+            raise exception_class(value)
+        if message == "" and "message" in value:
+            message = value["message"]
+    
+        screen = None  # type: ignore[assignment]
+        if "screen" in value:
+            screen = value["screen"]
+    
+        stacktrace = None
+        st_value = value.get("stackTrace") or value.get("stacktrace")
+        if st_value:
+            if isinstance(st_value, str):
+                stacktrace = st_value.split("\n")
+            else:
+                stacktrace = []
+                try:
+                    for frame in st_value:
+                        line = frame.get("lineNumber", "")
+                        file = frame.get("fileName", "&lt;anonymous&gt;")
+                        if line:
+                            file = f"{file}:{line}"
+                        meth = frame.get("methodName", "&lt;anonymous&gt;")
+                        if "className" in frame:
+                            meth = "{}.{}".format(frame["className"], meth)
+                        msg = "    at %s (%s)"
+                        msg = msg % (meth, file)
+                        stacktrace.append(msg)
+                except TypeError:
+                    pass
+        if exception_class == UnexpectedAlertPresentException:
+            alert_text = None
+            if "data" in value:
+                alert_text = value["data"].get("text")
+            elif "alert" in value:
+                alert_text = value["alert"].get("text")
+            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here
+&gt;       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: Unable to locate an element with the xpath expression INVALID XPATH because of the following error:
+E       SyntaxError: Failed to execute 'evaluate' on 'Document': The string 'INVALID XPATH' is not a valid XPath expression.
+E         (Session info: chrome=107.0.5304.63)
+E       Stacktrace:
+E       Backtrace:
+E       	Ordinal0 [0x01458CE3+2067683]
+E       	Ordinal0 [0x013ECBC1+1625025]
+E       	Ordinal0 [0x012EB7CD+571341]
+E       	Ordinal0 [0x012EE384+582532]
+E       	Ordinal0 [0x012EE235+582197]
+E       	Ordinal0 [0x012EE4D0+582864]
+E       	Ordinal0 [0x0131A9C2+764354]
+E       	Ordinal0 [0x0131AE3B+765499]
+E       	Ordinal0 [0x0134D122+971042]
+E       	Ordinal0 [0x01337384+881540]
+E       	Ordinal0 [0x0134B576+963958]
+E       	Ordinal0 [0x01337156+880982]
+E       	Ordinal0 [0x0130FF1D+720669]
+E       	Ordinal0 [0x01310F5F+724831]
+E       	GetHandleVerifier [0x0170F162+2771330]
+E       	GetHandleVerifier [0x01701145+2713957]
+E       	GetHandleVerifier [0x014ECC0A+533546]
+E       	GetHandleVerifier [0x014EB970+528784]
+E       	Ordinal0 [0x013F4F4C+1658700]
+E       	Ordinal0 [0x013F98B8+1677496]
+E       	Ordinal0 [0x013F99A5+1677733]
+E       	Ordinal0 [0x01404CC4+1723588]
+E       	BaseThreadInitThunk [0x764462C4+36]
+E       	RtlSubscribeWnfStateChangeNotification [0x77A90FA9+1081]
+E       	RtlSubscribeWnfStateChangeNotification [0x77A90F74+1028]
+
+../../.local/share/virtualenvs/How_to_generate_test_report_using_pytest_i-06yiM-BF/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py:249: InvalidSelectorException</failure></testcase><testcase classname="tests.test_login.TestLogin" name="test_valid_credentials" time="20.735" /><testcase classname="tests.test_search.TestSearch" name="test_valid_search" time="11.406" /></testsuite></testsuites>
