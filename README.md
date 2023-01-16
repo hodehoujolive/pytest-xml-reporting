@@ -8,17 +8,14 @@ The installation of Pytest is simple. If you have cloned the repository, it is a
 
 Make sure you have Homebrew on your machine because we will use a macOS operating system in this tutorial on how to generate test reports using pytest in XML.
 
-1. Type the following command in your terminal.
+. Type the following command in your terminal.
 
 **brew install pipenv**
 
-The **pipenv** installation should look like this
 
-![](RackMultipart20230116-1-td7o92_html_3f066ea85272a689.png)
+. Creation of Pipfile in an empty directory. This file is essential for using Pipenv. It's used to track your project's dependencies if you need to reinstall them.
 
-1. Creation of Pipfile in an empty directory. This file is essential for using Pipenv. It's used to track your project's dependencies if you need to reinstall them.
-
-[Pipfile (github.com)](https://gist.github.com/hodehoujolive/06d8e8235737a49208fa3de4608d805c)
+[Pipfile (github.com)
 
 The python\_version parameter is the version of the base interpreter you specified when creating a new pipenv environment.
 
@@ -26,8 +23,6 @@ The packages section is the place where you can list the packages required for y
 
 At the time of writing this blog on how to get the current URL in Selenium Python, the latest versions of Pytest and Selenium are Pytest 7.1.2 and 4.2.2, respectively.
 
-1. In your terminal, go to the directory and install the latest stable versions of the Pytest and Selenium packages with the command:
+. In your terminal, go to the directory and install the latest stable versions of the Pytest and Selenium packages with the command:
 
 **Pipenv Install**
-
-![](RackMultipart20230116-1-td7o92_html_9a6ed3efa62f30f7.png)
