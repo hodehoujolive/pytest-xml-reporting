@@ -1,4 +1,4 @@
-# README
+# GenerateXMLTestReport
 
 ## Description
 This is a sample project that demonstrates how to set up Pytest and generate an XML report using the `pytest-xml` plugin. This tutorial is intended for readers who may not be familiar with setting up Pytest.
