@@ -12,11 +12,11 @@ This is a sample project that demonstrates how to set up Pytest and generate an 
 ## Setup
 1. Clone the repository using the following command:
     ```
-    git clone https://github.com/<username>/<repository>.git
+    git clone https://github.com/hodehoujolive/GenerateXMLTestReport.git
     ```
 2. Navigate to the cloned directory:
     ```
-    cd <repository>
+    cd GenerateXMLTestReport
     ```
 3. Install pipenv using Homebrew:
     ```
