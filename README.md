@@ -34,8 +34,14 @@ This is a sample project that demonstrates how to set up Pytest and generate an 
     - Opera: OperaDriver
     - Edge: Microsoft Edge WebDriver
     Make sure you have the correct version for your browser, otherwise it won't work.
+    
+6. To generate an XML report using pytest, you can use the pytest-xml plugin:
+    ```
+    pipenv install pytest-xml
+    ```
+    This plugin will generate an XML file containing the test results, which can be read by other tools for further analysis.
 
-6. Run Pytest with the `pytest-xml` plugin to generate an XML report:
+7. Run your pytest tests with the `--junitxml` flag to specify the path of the XML file where the results will be saved:
     ```
     pipenv run python -m pytest -v --junitxml="path/to/report.xml"
     ```
