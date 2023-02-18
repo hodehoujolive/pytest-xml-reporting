@@ -1,28 +1,42 @@
-# GenerateXMLTestReport
-Blog : How to generate test report using Pytest in XML?
+# README
 
-### **Setting Up Pytest**
+## Description
+This is a sample project that demonstrates how to set up Pytest and generate an XML report using the `pytest-xml` plugin. This tutorial is intended for readers who may not be familiar with setting up Pytest.
 
+## Prerequisites
+- Python 3.6 or higher installed on your system
+- Homebrew (for macOS users)
+- Latest version of WebDriver for the browser you want to use
+- Git installed on your system
 
-The installation of Pytest is simple. If you have cloned the repository, it is already installed, and you can skip this step. If you have not cloned the repository, follow these steps:
+## Setup
+1. Clone the repository using the following command:
+    ```
+    git clone https://github.com/<username>/<repository>.git
+    ```
+2. Navigate to the cloned directory:
+    ```
+    cd <repository>
+    ```
+3. Install pipenv using Homebrew:
+    ```
+    brew install pipenv
+    ```
+4. Create a Pipfile to track your project's dependencies:
+    ```
+    pipenv install --dev
+    ```
+    This will install the latest stable versions of Pytest and Selenium packages.
 
-Make sure you have Homebrew on your machine because we will use a macOS operating system in this tutorial on how to generate test reports using pytest in XML.
+5. Install the latest version of WebDriver for the browser you want to use. You can download the WebDriver for the following commonly used browsers:
+    - Firefox: GeckoDriver
+    - Chrome: ChromeDriver
+    - Opera: OperaDriver
+    - Edge: Microsoft Edge WebDriver
+    Make sure you have the correct version for your browser, otherwise it won't work.
 
-- Type the following command in your terminal.
-
-**brew install pipenv**
-
-
-- Creation of Pipfile in an empty directory. This file is essential for using Pipenv. It's used to track your project's dependencies if you need to reinstall them.
-
-[[Pipfile (github.com)](https://gist.github.com/hodehoujolive/06d8e8235737a49208fa3de4608d805c)
-
-The python\_version parameter is the version of the base interpreter you specified when creating a new pipenv environment.
-
-The packages section is the place where you can list the packages required for your project. "\*" is for installing the latest stable versions of the packages.
-
-At the time of writing this blog on how to get the current URL in Selenium Python, the latest versions of Pytest and Selenium are Pytest 7.1.2 and 4.2.2, respectively.
-
-- In your terminal, go to the directory and install the latest stable versions of the Pytest and Selenium packages with the command:
-
-**Pipenv Install**
+6. Run Pytest with the `pytest-xml` plugin to generate an XML report:
+    ```
+    pipenv run python -m pytest -v --junitxml="path/to/report.xml"
+    ```
+    This will generate an XML file containing the test results, which can be read by other tools for further analysis.
