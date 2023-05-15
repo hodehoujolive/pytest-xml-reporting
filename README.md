@@ -1,8 +1,7 @@
 # GenerateXMLTestReport
 
 ## Description
-This is a sample project that demonstrates how to set up Pytest and generate an XML report using the `pytest-xml` plugin. This tutorial is intended for readers who may not be familiar with setting up Pytest.
-
+This test automation project showcases the integration of pytest and Selenium to build a robust and scalable testing framework. It specifically focuses on utilizing the pytest-xml library to generate detailed test reports, providing comprehensive insights into test execution and results.
 ## Prerequisites
 - Python 3.6 or higher installed on your system
 - Homebrew (for macOS users)
